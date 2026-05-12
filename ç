@@ -1,0 +1,27 @@
+usuario.java
+
+package model;
+
+public class Usuario {
+    public double peso;
+    public int aguaConsumida;
+    
+    public double calcularMeta() {
+        return peso * 35;
+    }
+    public double 
+calcularProgresso(){
+    return (aguaConsumida * 100.0) / calcularMeta();
+}
+
+public int calcularPontos() {
+    int pontos = aguaConsumida / 100;
+
+    if (aguaConsumida >= 2000) {
+        pontos += 2; // bônus da meta
+    }
+
+    return pontos;
+}
+    
+}
