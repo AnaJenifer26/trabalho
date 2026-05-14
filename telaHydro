@@ -4,6 +4,7 @@
  */
 package view;
 
+import java.awt.event.ActionEvent;
 import model.Usuario;
 
 import javax.swing.JOptionPane;
@@ -14,6 +15,14 @@ import javax.swing.JOptionPane;
  */
 public class TelaHydro extends javax.swing.JFrame {
     Usuario user = new Usuario();
+    int metaDiaria = 0;
+    boolean metaMostrada = false;
+    boolean azulLiberado = false;
+boolean roxoLiberado = false;
+boolean neonLiberado = false;
+boolean gamerLiberado = false;
+
+
     
     public TelaHydro() {
         initComponents();
@@ -53,6 +62,9 @@ public class TelaHydro extends javax.swing.JFrame {
         txtPeso = new javax.swing.JTextField();
         txtNome = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
+        labelIdade = new javax.swing.JLabel();
+        txtIdade = new javax.swing.JTextField();
+        labelMeta = new javax.swing.JLabel();
 
         jLabel4.setText("jLabel4");
 
@@ -98,14 +110,16 @@ public class TelaHydro extends javax.swing.JFrame {
 
         txtPeso.addActionListener(this::txtPesoActionPerformed);
 
+        labelIdade.setText("idade");
+
+        txtIdade.addActionListener(this::txtIdadeActionPerformed);
+
+        labelMeta.setText("meta diaria");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnPontos)
-                .addGap(144, 144, 144))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jSeparator1)
@@ -114,22 +128,22 @@ public class TelaHydro extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(labelResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(labelNome)
-                                .addGap(12, 12, 12)
-                                .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(labelPeso)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(150, 150, 150))))
+                        .addComponent(labelNome)
+                        .addGap(12, 12, 12)
+                        .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                        .addGap(150, 150, 150))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(labelPeso)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(labelIdade)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,6 +169,17 @@ public class TelaHydro extends javax.swing.JFrame {
                         .addGap(36, 36, 36)
                         .addComponent(labelMenssagem)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnPontos)
+                        .addGap(209, 209, 209))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(labelMeta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,19 +193,19 @@ public class TelaHydro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelPeso)
-                    .addComponent(txtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelIdade)
+                    .addComponent(txtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCalcular)
-                    .addComponent(labelResultado))
+                .addComponent(btnCalcular)
                 .addGap(5, 5, 5)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgua, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpar))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAgua, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLimpar))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelPontos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -190,8 +215,12 @@ public class TelaHydro extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelMenssagem)
                         .addContainerGap(58, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelResultado)
+                            .addComponent(labelMeta))
+                        .addGap(95, 95, 95)
                         .addComponent(btnPontos)
                         .addContainerGap())))
         );
@@ -215,24 +244,79 @@ public class TelaHydro extends javax.swing.JFrame {
     }// </editor-fold>                        
 
     private void btnAguaActionPerformed(java.awt.event.ActionEvent evt) {                                        
-     
     user.beberAgua();
 
-    labelAgua.setText(user.getLitros() + " L/ 2L");
+   labelAgua.setText(
+user.getAguaMl() + " ml / " + metaDiaria + " ml"
+);
 
     labelPontos.setText(
     "Pontos: " + user.getPontos() + "/30"
     );
 
-    if(user.getAguaMl() >= 2000){
+   // TEMA AZUL
+   if(user.getPontos() >= 5){
+
+    if(azulLiberado == false){
 
         JOptionPane.showMessageDialog(null,
-        "Parabéns! Você atingiu a meta diária!");
-    
+        "Parabéns! Você desbloqueou o Tema Azul!");
 
+        azulLiberado = true;
     }
 
-// TODO add your handling code here:
+}
+   // TEMA ROXO
+   if(user.getPontos() >= 10){
+
+        if(roxoLiberado == false){
+
+            JOptionPane.showMessageDialog(null,
+            "Parabéns! Você desbloqueou o Tema Roxo!");
+
+            roxoLiberado = true;
+        }
+    }
+
+    // TEMA NEON
+    if(user.getPontos() >= 20){
+
+        if(neonLiberado == false){
+
+            JOptionPane.showMessageDialog(null,
+            "Parabéns! Você desbloqueou o Tema Neon!");
+
+            neonLiberado = true;
+        }
+    }
+
+    // TEMA GAMER
+    if(user.getPontos() >= 30){
+
+        if(gamerLiberado == false){
+
+            JOptionPane.showMessageDialog(null,
+            "Parabéns! Você desbloqueou o Tema Gamer!");
+
+            gamerLiberado = true;
+        }
+    }
+
+   // META DIÁRIA
+if(metaDiaria > 0){
+
+    if(user.getAguaMl() >= metaDiaria){
+
+        if(metaMostrada == false){
+
+            JOptionPane.showMessageDialog(null,
+            "Parabéns! Você atingiu a meta diária!");
+
+            metaMostrada = true;
+        }
+    }
+}
+// TODO add your handling code here
     }                                       
 
     private void btnPontosActionPerformed(java.awt.event.ActionEvent evt) {                                          
@@ -242,15 +326,25 @@ tela.setVisible(true);        // TODO add your handling code here:
     }                                         
 
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {                                            
-double peso;
+  double peso;
+int idade;
 
 peso = Double.parseDouble(txtPeso.getText());
 
-int resultado = (int)(peso * 35);
+idade = Integer.parseInt(txtIdade.getText());
 
-labelResultado.setText(
-"Você precisa beber " + resultado + " ml por dia"
-);        // TODO add your handling code here:
+if(idade >= 15 && idade <= 17){
+
+    metaDiaria = (int)(peso * 40);
+
+}else{
+
+    metaDiaria = (int)(peso * 35);
+}
+
+labelMeta.setText(
+"Meta diária: " + metaDiaria + " ml"
+);     // TODO add your handling code here:
     }                                           
 
     private void btnNomeActionPerformed(java.awt.event.ActionEvent evt) {                                        
@@ -265,12 +359,14 @@ labelMenssagem.setText("Bem-vindo, " + nome + "!");       // TODO add your handl
 
 
     user.limparDados();
+    metaMostrada = false;
 
     labelAgua.setText("0 L");
 
     labelPontos.setText("Pontos: 0/30");
 
     txtPeso.setText("");
+    txtIdade.setText("");
 
     labelResultado.setText("");
 
@@ -284,6 +380,10 @@ labelMenssagem.setText("Bem-vindo, " + nome + "!");       // TODO add your handl
     private void txtPesoActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
     }                                       
+
+    private void txtIdadeActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+    }                                        
 
     /**
      * @param args the command line arguments
@@ -320,12 +420,15 @@ labelMenssagem.setText("Bem-vindo, " + nome + "!");       // TODO add your handl
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel labelAgua;
+    private javax.swing.JLabel labelIdade;
     private javax.swing.JLabel labelMenssagem;
+    private javax.swing.JLabel labelMeta;
     private javax.swing.JLabel labelNome;
     private javax.swing.JLabel labelPeso;
     private javax.swing.JLabel labelPontos;
     private javax.swing.JLabel labelResultado;
     private javax.swing.JLabel labelTitulo;
+    private javax.swing.JTextField txtIdade;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtPeso;
     // End of variables declaration                   
